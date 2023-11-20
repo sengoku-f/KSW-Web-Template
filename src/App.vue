@@ -3,22 +3,39 @@
     <HelloWorld msg="Welcome to Your Vue.js App" />
     <div class="text-6xl text-yellow-500 bg-blue-800 w-96">123</div>
     <div class="bbm">321</div>
-    <MyTag color="red">233</MyTag>
-    <MyTag title="23333" color="blue"/>
+    <div style="display: flex">
+      <Tag type="success">success</Tag>
+      <Tag type="info">info</Tag>
+      <Tag type="warning">warning</Tag>
+      <Tag type="danger">danger</Tag>
+      <Tag type="default">default</Tag>
+      <Tag type="default" :auto="auto.success">233</Tag>
+      <Tag type="default" :auto="auto.success1">233</Tag>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import MyTag from './components/MyTag.vue'
+import HelloWorld from "./components/HelloWorld.vue";
+import Tag from "./components/Tag.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     HelloWorld,
-    MyTag,
-  }
-}
+    Tag,
+  },
+  data() {
+    return {
+      auto: {
+        success: 'success',
+        success1: '#87d068',
+        // info1: "#2db7f5",
+        // warning1: "warning"
+      },
+    };
+  },
+};
 </script>
 
 <style>
@@ -33,11 +50,11 @@ export default {
 .k_h1 {
   @apply text-xl font-medium;
 }
-.el-checkbox__label{
-@apply text-sm;
+.el-checkbox__label {
+  @apply text-sm;
 }
 
-.el-checkbox__label__ed{
-@apply text-sm text-red-500;
+.el-checkbox__label__ed {
+  @apply text-sm text-red-500;
 }
 </style>
