@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     getcolor() {
-      console.log(this.auto.success1);
+      console.log(this.auto);
       if (this.auto.success1) {
         console.log("包含" + this.auto.success1);
         if (this.auto.success1.includes("#")) {
@@ -45,7 +45,7 @@ export default {
           };
         }
       } else {
-        console.log("空值");
+        // console.log("空值");
         return {};
       }
     },
