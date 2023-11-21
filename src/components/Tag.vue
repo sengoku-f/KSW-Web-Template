@@ -1,5 +1,5 @@
 <template>
-  <div class="tag" :class="[TagType, getcolor]">
+  <div class="tag" :class="TagType" :style="getcolor.TagStyle">
     <slot></slot>
   </div>
 </template>
@@ -9,43 +9,40 @@ export default {
   name: "Tag",
   props: {
     type: String,
-    auto: {
-      type: Object,
-      default() {
-        return {};
-      },
-    },
+    auto: String,
+    isBlock: Boolean,
   },
   data() {
     return {
       TagType: `tag-${this.type}`,
-      // TagAuto: `tag-has-${this.auto}`,
     };
   },
   computed: {
     getcolor() {
-      console.log(this.auto);
-      if (this.auto.success1) {
-        console.log("包含" + this.auto.success1);
-        if (this.auto.success1.includes("#")) {
-          console.log("包含#");
-          const [r, g, b] = this.auto.success1.match(/\w\w/g).map(x => parseInt(x, 16));
-          console.log(`rgba(${r},${g},${b},0.1)`);
-          return {
-            TagColor: "tag-has-color",
-            TagStyle: {
-              color: `${this.auto.success1}`,
-              backgroundColor: `rgba(${r},${g},${b},0.1)`
+      if (this.auto) {
+        if (this.auto.includes("#")) {
+          const [r, g, b] = this.auto
+            .match(/\w\w/g)
+            .map((x) => parseInt(x, 16));
+
+          if (this.isBlock == true) {
+            return {
+              TagStyle: {
+                color: "#fff",
+                backgroundColor: `${this.auto}`,
               },
+            };
+          }
+          return {
+            TagStyle: {
+              color: `${this.auto}`,
+              backgroundColor: `rgba(${r},${g},${b},.08)`,
+            },
           };
         } else {
-          console.log("不含#");
-          return {
-            TagColor: `"tag-${this.auto.success1}`,
-          };
+          return `tag-${this.auto}`;
         }
       } else {
-        // console.log("空值");
         return {};
       }
     },
@@ -75,6 +72,11 @@ export default {
 .tag-success {
   color: #2ea121;
   background: #f0fbef;
+}
+
+.tag-success-block {
+  color: #fff;
+  background: #2ea121;
 }
 
 .tag-info {
